@@ -1,0 +1,116 @@
+POWER FLOW REPORT
+ 
+P S A T  2.1.9
+ 
+Author:  Federico Milano, (c) 2002-2013
+e-mail:  federico.milano@ucd.ie
+website: faraday1.ucd.ie/psat.html
+ 
+File:  C:\Users\Miguel\Documents\MATLAB\Newton\Tarea_psat_08_04_17
+Date:  11-May-2017 00:34:01
+
+
+NETWORK STATISTICS
+
+Buses:                        14         
+Lines:                        20         
+Generators:                   3          
+Loads:                        14         
+
+SOLUTION STATISTICS
+
+Number of Iterations:         5          
+Maximum P mismatch [p.u.]     0          
+Maximum Q mismatch [p.u.]     0          
+Power rate [MVA]              100        
+
+POWER FLOW RESULTS
+
+Bus         V           phase       P gen       Q gen       P load      Q load      
+            [p.u.]      [deg]       [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 01      0.9419      2.9183      1.1417     -0.169       0           0          
+Bus 02      0.93872    -0.09599     0           0           0.217       0.127      
+Bus 03      1.01        0           1.5232      0.84865     0.942       0.191      
+Bus 04      0.91973    -3.7366      0           0           0.478      -0.039      
+Bus 05      0.91337    -3.0459      0           0           0.076       0.016      
+Bus 06      0.92098    -9.6511      0           0           0.112       0.075      
+Bus 07      0.92219    -7.8949      0           0           0           0          
+Bus 08      0.92219    -7.8949      0           0           0           0          
+Bus 09      0.91461    -10.1428     0           0           0.295       0.00706    
+Bus 10      0.90723    -10.444      0           0           0.09        0.058      
+Bus 11      0.91013    -10.2273     0           0           0.035       0.018      
+Bus 12      0.90423    -10.7789     0           0           0.061       0.016      
+Bus 13      0.89937    -10.8725     0           0           0.138       0.058      
+Bus 14      0.88693    -11.8153     0           0           0.149       0.05       
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 01      Bus 02      1           0.73078    -0.1914      0.01228    -0.00919    
+Bus 01      Bus 05      2           0.41092     0.0224      0.01039     0.00519    
+Bus 02      Bus 03      3          -0.08354    -0.33464     0.00577    -0.01124    
+Bus 02      Bus 04      4           0.31345    -0.01402     0.00648    -0.02282    
+Bus 02      Bus 05      5           0.27159     0.03944     0.00496    -0.01402    
+Bus 03      Bus 04      6           0.49184     0.33426     0.02403     0.02904    
+Bus 04      Bus 05      7          -0.17809     0.19142     0.00111    -0.00725    
+Bus 04      Bus 07      8           0.30072     0.09289     0           0.02342    
+Bus 04      Bus 09      9           0.17415     0.0687      0           0.02164    
+Bus 05      Bus 06      10          0.41196     0.25334     0           0.06137    
+Bus 06      Bus 11      11          0.05412     0.02461     0.0004      0.00083    
+Bus 06      Bus 12      12          0.07584     0.0245      0.00092     0.00192    
+Bus 06      Bus 13      13          0.16999     0.06786     0.00261     0.00515    
+Bus 07      Bus 08      14          0           0           0           0          
+Bus 07      Bus 09      15          0.30072     0.06947     0           0.01232    
+Bus 09      Bus 10      16          0.07161     0.05311     0.0003      0.0008     
+Bus 09      Bus 14      17          0.10826     0.04403     0.00208     0.00442    
+Bus 10      Bus 11      18         -0.01869    -0.00569     4e-05       9e-05      
+Bus 12      Bus 13      19          0.01392     0.00658     6e-05       6e-05      
+Bus 13      Bus 14      20          0.04323     0.01124     0.00042     0.00086    
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+Bus 02      Bus 01      1          -0.71849     0.18221     0.01228    -0.00919    
+Bus 05      Bus 01      2          -0.40053    -0.01721     0.01039     0.00519    
+Bus 03      Bus 02      3           0.08931     0.32339     0.00577    -0.01124    
+Bus 04      Bus 02      4          -0.30697    -0.0088      0.00648    -0.02282    
+Bus 05      Bus 02      5          -0.26663    -0.05347     0.00496    -0.01402    
+Bus 04      Bus 03      6          -0.46782    -0.30522     0.02403     0.02904    
+Bus 05      Bus 04      7           0.1792     -0.19867     0.00111    -0.00725    
+Bus 07      Bus 04      8          -0.30072    -0.06947     0           0.02342    
+Bus 09      Bus 04      9          -0.17415    -0.04706     0           0.02164    
+Bus 06      Bus 05      10         -0.41196    -0.19197     0           0.06137    
+Bus 11      Bus 06      11         -0.05373    -0.02378     0.0004      0.00083    
+Bus 12      Bus 06      12         -0.07492    -0.02258     0.00092     0.00192    
+Bus 13      Bus 06      13         -0.16738    -0.06272     0.00261     0.00515    
+Bus 08      Bus 07      14          0           0           0           0          
+Bus 09      Bus 07      15         -0.30072    -0.05715     0           0.01232    
+Bus 10      Bus 09      16         -0.07131    -0.05231     0.0003      0.0008     
+Bus 14      Bus 09      17         -0.10619    -0.03962     0.00208     0.00442    
+Bus 11      Bus 10      18          0.01873     0.00578     4e-05       9e-05      
+Bus 13      Bus 12      19         -0.01386    -0.00652     6e-05       6e-05      
+Bus 14      Bus 13      20         -0.04281    -0.01038     0.00042     0.00086    
+
+GLOBAL SUMMARY REPORT
+
+
+TOTAL GENERATION
+
+REAL POWER [p.u.]             2.6649     
+REACTIVE POWER [p.u.]         0.67965    
+
+TOTAL LOAD
+
+REAL POWER [p.u.]             2.593      
+REACTIVE POWER [p.u.]         0.57706    
+
+TOTAL LOSSES
+
+REAL POWER [p.u.]             0.07185    
+REACTIVE POWER [p.u.]         0.10259    
+

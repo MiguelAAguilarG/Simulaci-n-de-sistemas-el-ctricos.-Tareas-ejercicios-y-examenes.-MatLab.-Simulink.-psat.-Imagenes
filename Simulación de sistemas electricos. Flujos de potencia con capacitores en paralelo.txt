@@ -1,0 +1,315 @@
+clear all
+clc
+format short
+%************************************
+%Nodos pv (es un vector renglón)
+nodospv=[4];
+iter=10;
+maxerror=0.0001;
+%El nodo slack siempre debe de ser el nodo 1
+%La reactancia capacitiva se deja sin signo negativo
+%Potencias de carga (negativas), Potencias de generacion (positivas)
+%Poner siempre valores de capacitancia en paralelo, aunque sea solo 0;
+%Poner siempre valores de relacion de tranformación, de 1;
+
+z(1,2)=0.01008+0.05040j;
+z(1,3)=0.00744+0.03720j;
+z(2,4)=0.00744+0.03720j;
+z(3,4)=0.01272+0.06360j;
+
+c=zeros(4);
+c(1,2)=1/(2*0.05125j);
+c(1,3)=1/(2*0.03875j);
+c(2,4)=1/(2*0.03875j);
+c(3,4)=1/(2*0.06375j);
+
+%Stevenson toma al reves
+rel=ones(4);
+
+v(1)=1.0+0j;
+v(2)=1.0+0j;
+v(3)=1.0+0j;
+v(4)=1.02+0j;
+
+poti(1)=-0.5;
+poti(2)=-1.7;
+poti(3)=-2.0;
+poti(4)=3.18-0.80;
+
+qi(1)=-0.3099;
+qi(2)=-1.0535;
+qi(3)=-1.2394;
+qi(4)=-0.4958;
+
+
+
+angulo =
+         0   -0.9761   -1.8722    1.5231
+v =
+    1.0000    0.9824    0.9690    1.0200
+cont =
+     4
+
+
+vol =
+   1.0000 + 0.0000i   0.9823 - 0.0167i   0.9685 - 0.0317i   1.0196 + 0.0271i
+
+
+cor =
+
+   0.0000 + 0.0000i   0.3869 - 0.2230i   0.9812 - 0.6121i   0.0000 + 0.0000i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.3258 + 0.7771i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0411 + 0.6574i
+   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+
+
+cor =
+
+   0.0000 + 0.0000i   0.3869 - 0.2230i   0.9812 - 0.6121i   0.0000 + 0.0000i
+  -0.3861 + 0.3246i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.3258 + 0.7771i
+  -0.9799 + 0.6884i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0411 + 0.6574i
+   0.0000 + 0.0000i   1.3254 - 0.6995i   1.0414 - 0.5306i   0.0000 + 0.0000i
+
+
+scomlinea =
+
+   0.0000 + 0.0000i   0.3869 + 0.2230i   0.9812 + 0.6121i   0.0000 + 0.0000i
+  -0.3846 - 0.3124i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.3154 - 0.7411i
+  -0.9709 - 0.6357i   0.0000 + 0.0000i   0.0000 + 0.0000i  -1.0291 - 0.6037i
+   0.0000 + 0.0000i   1.3325 + 0.7492i   1.0475 + 0.5693i   0.0000 + 0.0000i
+
+
+scomperdidas =
+
+   0.0000 + 0.0000i   0.0023 - 0.0894i   0.0103 - 0.0236i   0.0000 + 0.0000i
+   0.0023 - 0.0894i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0172 + 0.0081i
+   0.0103 - 0.0236i   0.0000 + 0.0000i   0.0000 + 0.0000i   0.0184 - 0.0344i
+   0.0000 + 0.0000i   0.0172 + 0.0081i   0.0184 - 0.0344i   0.0000 + 0.0000i
+
+
+scomnodos =
+
+   1.3681 + 0.8351i  -1.7000 - 1.0535i  -2.0000 - 1.2394i   2.3800 + 1.3185i
+
+>> 
+
+
+
+
+clear
+
+basemva=100;
+
+%Acelerar
+accel=1;
+
+%Exactitud
+accuracy=0.0001;
+
+maxiter=80;
+
+% 1--slack
+% 0--load
+% 2--generation
+
+%	bus	bus	voltage	angle	----Load----	-----Generator-----Injected
+%	No	code	mag	degree	MW	Mvar	MW	Mvar	Qmin	Qmax	Mvar	
+busdata=[1	1 	1	0	50	30.99	0	0	0	0	0
+	2	0	1	0	170	105.35	0	0	0	0	0
+	3	0	1	0	200	123.94	0	0	0	0	0
+	4	2	1.02	0	80	49.58	318	0	0	0	0
+];
+
+%	Bus	bus	R	X	1/2 B	TAP
+%	NL	NR	pu	pu	pu
+linedata=[1	2	0.01008	0.05040	0.05125	1
+	1	3	0.00744	0.03720	0.03875	1
+	2	4	0.00744	0.03720	0.03875	1
+	3	4	0.01272	0.06360	0.06375	1];
+
+lfybus
+lfnewton
+busout
+lineflow
+
+>> clear
+
+basemva=100;
+
+%Acelerar
+accel=1;
+
+%Exactitud
+accuracy=0.0001;
+
+maxiter=80;
+
+% 1--slack
+% 0--load
+% 2--generation
+
+%	bus	bus	voltage	angle	----Load----	-----Generator-----Injected
+%	No	code	mag	degree	MW	Mvar	MW	Mvar	Qmin	Qmax	Mvar	
+busdata=[1	1 	1	0	50	30.99	0	0	0	0	0
+	2	0	1	0	170	105.35	0	0	0	0	0
+	3	0	1	0	200	123.94	0	0	0	0	0
+	4	2	1.02	0	80	49.58	318	0	0	0	0
+];
+
+%	Bus	bus	R	X	1/2 B	TAP
+%	NL	NR	pu	pu	pu
+linedata=[1	2	0.01008	0.05040	0.05125	1
+	1	3	0.00744	0.03720	0.03875	1
+	2	4	0.00744	0.03720	0.03875	1
+	3	4	0.01272	0.06360	0.06375	1];
+
+lfybus
+lfnewton
+busout
+lineflow
+                   Power Flow Solution by Newton-Raphson Method
+                      Maximum Power Mismatch = 1.06852e-09 
+                             No. of Iterations = 4 
+
+    Bus  Voltage  Angle    ------Load------    ---Generation---   Injected
+    No.  Mag.     Degree     MW       Mvar       MW       Mvar       Mvar 
+                                                                          
+     1  1.0000   0.0000   50.0000   30.9900  186.8091  114.5008    0.0000
+     2  0.9824  -0.9761  170.0000  105.3500    0.0000    0.0000    0.0000
+     3  0.9690  -1.8722  200.0000  123.9400    0.0000    0.0000    0.0000
+     4  1.0200   1.5231   80.0000   49.5800  318.0000  181.4296    0.0000
+      
+    Total                500.0000  309.8600  504.8091  295.9305    0.0000
+
+
+                           Line Flow and Losses 
+
+     --Line--  Power at bus & line flow    --Line loss--  Transformer
+     from  to    MW      Mvar     MVA       MW      Mvar      tap
+   
+     1        136.809   83.511  160.283
+           2   38.692   22.298   44.657    0.227   -8.938
+           3   98.118   61.212  115.646    1.031   -2.356
+   
+     2       -170.000 -105.350  199.997
+           1  -38.465  -31.236   49.550    0.227   -8.938
+           4 -131.535  -74.114  150.978    1.715    0.806
+   
+     3       -200.000 -123.940  235.289
+           1  -97.086  -63.569  116.046    1.031   -2.356
+           4 -102.914  -60.371  119.315    1.835   -3.441
+   
+     4        238.000  131.850  272.081
+           2  133.251   74.920  152.868    1.715    0.806
+           3  104.749   56.930  119.220    1.835   -3.441
+   
+    Total loss                             4.809  -13.930
+
+
+                        < P S A T >
+          Copyright (C) 2002-2014 Federico Milano
+                       Version 2.1.9
+                     September 6, 2014
+  
+PSAT comes with ABSOLUTELY NO WARRANTY; type 'gnuwarranty'
+for details. This is free software, and you are welcome to
+redistribute it under certain conditions; type 'gnulicense'
+for details.
+  
+Host:         Matlab 8.1.0.604 (R2013a)
+Session:      07-May-2017 18:42:56
+Usage:        Graphical User Interface
+Path:         C:\Users\Miguel\Documents\MATLAB\Newton
+ 
+Parameter "Settings.freq" set to "60".
+Parameter "Settings.lftol" set to "1e-04".
+Parameter "Settings.dyntol" set to "1e-04".
+Data file "C:\Users\Miguel\Documents\MATLAB\Simulación de sistemas eléctricos\Tarea_psat_04_04_17" set
+   
+Newton-Raphson Method for Power Flow Computation
+Data file "C:\Users\Miguel\Documents\MATLAB\Simulación de sistemas eléctricos\Tarea_psat_04_04_17"
+Writing file "fm_call" ...
+PF solver: Newton-Raphson method
+Single slack bus model
+Iteration = 1     Maximum Convergency Error = 0.030979
+Iteration = 2     Maximum Convergency Error = 0.00095908
+Iteration = 3     Maximum Convergency Error = 0.00033999
+Iteration = 4     Maximum Convergency Error = 0.00017423
+Iteration = 5     Maximum Convergency Error = 0.00010597
+Iteration = 6     Maximum Convergency Error = 7.126e-05
+Power Flow completed in 0.162 s
+
+POWER FLOW REPORT
+ 
+P S A T  2.1.9
+ 
+Author:  Federico Milano, (c) 2002-2013
+e-mail:  federico.milano@ucd.ie
+website: faraday1.ucd.ie/psat.html
+ 
+File:  C:\Users\Miguel\Documents\MATLAB\Simulación de sistemas eléctricos\Tarea_psat_04_04_17
+Date:  07-May-2017 18:46:33
+
+
+NETWORK STATISTICS
+
+Buses:                        4          
+Lines:                        4          
+Generators:                   2          
+Loads:                        4          
+
+SOLUTION STATISTICS
+
+Number of Iterations:         6          
+Maximum P mismatch [p.u.]     0.0121     
+Maximum Q mismatch [p.u.]     0.0116     
+Power rate [MVA]              100        
+
+POWER FLOW RESULTS
+
+Bus         V           phase       P gen       Q gen       P load      Q load      
+            [p.u.]      [deg]       [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus1       1           0           2.3574      1.5425      0.5         0.3099     
+ Bus2       0.9816     -0.9585      1.706       1.0596      1.7         1.0535     
+ Bus3       0.9681     -1.8459      2.0121      1.251       2           1.2394     
+ Bus4       1.02        1.527       3.9732      2.4016      0.8         0.4958     
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus1        Bus2       1           0.384       0.266       0.0023     -0.0378     
+ Bus1        Bus3       2           0.9734      0.6567      0.0104      0.0162     
+ Bus2        Bus4       3          -1.3123     -0.7436      0.0174      0.0496     
+ Bus3        Bus4       4          -1.025      -0.5873      0.0185      0.0295     
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus2        Bus1       1          -0.3817     -0.3037      0.0023     -0.0378     
+ Bus3        Bus1       2          -0.9629     -0.6405      0.0104      0.0162     
+ Bus4        Bus2       3           1.3297      0.7932      0.0174      0.0496     
+ Bus4        Bus3       4           1.0435      0.6168      0.0185      0.0295     
+
+GLOBAL SUMMARY REPORT
+
+
+TOTAL GENERATION
+
+REAL POWER [p.u.]             10.0486    
+REACTIVE POWER [p.u.]         6.2546     
+
+TOTAL LOAD
+
+REAL POWER [p.u.]             5          
+REACTIVE POWER [p.u.]         3.0986     
+
+TOTAL LOSSES
+
+REAL POWER [p.u.]             5.0486     
+REACTIVE POWER [p.u.]         3.156      
+

@@ -1,0 +1,51 @@
+Tarea 5
+Ejercicio8_13_02_17
+
+Buscar mejorar el PID, justificar, los criterios
+
+R=2
+C=10e-3
+L=1/4
+1.25
+
+R=2
+C=1
+L=1/4
+0.1250
+
+R=2
+C=0.5
+L=8
+1
+
+1/2*sqrt(L*C)/(R*C)
+
+clear all;
+clc;
+
+%'K' y 'a' valores a comprobar
+K = [1:0.1:3.5];
+a = [0.1:0.1:2.6];
+% Evaluar la respuesta en lazo cerrado a un escalón unitario en cada combinación
+% de 'K' y 'a' que dará la sobreelongación máxima menor que el 10%
+t = 0:0.01:10;
+g = tf([1],[1 4 2]);
+k=0;
+for i = 1: length(K);
+for j = 1: length(a);
+gc = tf(K(i)*[1 2*a(j) a(j)^2],[1 0]);
+G = gc*g/(1+gc*g); % función de transferencia en lazo cerrado
+y = step(G,t);
+m = max(y);
+if m<1.05
+k=k+1;
+solution(k,:) = [K(i) a(j) m];
+end
+end
+end
+solution;
+sortsolution = sortrows(solution,3);
+
+K = sortsolution(k,1)
+a = sortsolution(k,2)
+m = sortsolution(k,3)

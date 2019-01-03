@@ -1,0 +1,74 @@
+POWER FLOW REPORT
+ 
+P S A T  2.1.9
+ 
+Author:  Federico Milano, (c) 2002-2013
+e-mail:  federico.milano@ucd.ie
+website: faraday1.ucd.ie/psat.html
+ 
+File:  C:\Users\Miguel\Documents\MATLAB\Simulación de sistemas eléctricos\Tarea_psat_04_04_17
+Date:  08-May-2017 10:21:50
+
+
+NETWORK STATISTICS
+
+Buses:                        4          
+Lines:                        4          
+Generators:                   2          
+Loads:                        4          
+
+SOLUTION STATISTICS
+
+Number of Iterations:         2          
+Maximum P mismatch [p.u.]     0.035      
+Maximum Q mismatch [p.u.]     0.034      
+Power rate [MVA]              100        
+
+POWER FLOW RESULTS
+
+Bus         V           phase       P gen       Q gen       P load      Q load      
+            [p.u.]      [deg]       [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus1       1           0           2.335       1.521       0.5         0.31       
+ Bus2       0.982      -0.943       1.717       1.072       1.7         1.054      
+ Bus3       0.969      -1.816       2.035       1.273       2           1.239      
+ Bus4       1.02        1.534       3.96        2.384       0.8         0.496      
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus1        Bus2       1           0.378       0.261       0.002      -0.038      
+ Bus1        Bus3       2           0.957       0.641       0.01        0.014      
+ Bus2        Bus4       3          -1.307      -0.737       0.017       0.049      
+ Bus3        Bus4       4          -1.018      -0.579       0.018       0.028      
+
+LINE FLOWS
+
+From Bus    To Bus      Line        P Flow      Q Flow      P Loss      Q Loss      
+                                    [p.u.]      [p.u.]      [p.u.]      [p.u.]      
+
+ Bus2        Bus1       1          -0.375      -0.299       0.002      -0.038      
+ Bus3        Bus1       2          -0.947      -0.627       0.01        0.014      
+ Bus4        Bus2       3           1.324       0.785       0.017       0.049      
+ Bus4        Bus3       4           1.036       0.607       0.018       0.028      
+
+GLOBAL SUMMARY REPORT
+
+
+TOTAL GENERATION
+
+REAL POWER [p.u.]             10.048     
+REACTIVE POWER [p.u.]         6.249      
+
+TOTAL LOAD
+
+REAL POWER [p.u.]             5          
+REACTIVE POWER [p.u.]         3.099      
+
+TOTAL LOSSES
+
+REAL POWER [p.u.]             5.048      
+REACTIVE POWER [p.u.]         3.151      
+

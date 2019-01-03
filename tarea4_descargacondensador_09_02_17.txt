@@ -1,0 +1,9 @@
+Tarea 4
+Realizar el mismo ejercicio para la descarga de un condensador, en función de la carga q.
+	Realizar diagrama de bloques
+	codigo
+
+V=10v
+R=2
+C=0.8
+t = 10s

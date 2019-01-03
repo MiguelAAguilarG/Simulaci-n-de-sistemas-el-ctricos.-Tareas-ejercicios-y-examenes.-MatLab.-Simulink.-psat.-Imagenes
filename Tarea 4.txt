@@ -1,0 +1,13 @@
+Tarea 4
+
+Figuras de Lissajous
+1. Explicar que funcion tiene los parametros de cada bloque
+2. Cambiar los parametros de simulacion (Minimo 5) y aumentar el tiempo de simulación, puede ontener una figura hermosa? Comparar y analizar los resutados
+3: Explique el origen y en que consisten las curvas de Lissajous
+
+Las figuras de Lissajous se emplean para determinar la frecuencia y fase relativa entre dos oscilaciones senoidales. Nada que ver con la resistencia.
+Cuando se obtiene una diagonal ascendente hacia la derecha, significa que ambas frecuencias son iguales y están en fase.
+Cuando se obtiene una diagonal ascendente hacia la izquierda, significa que ambas frecuencias son iguales, pero en oposición de fase (ángulo de 180º).
+Cuando se obtiene una circunferencia, significa que ambas frecuencias son iguales pero desfasadas un ángulo recto (90º).
+Cuando se obtienen figuras que a Vd. le recuerda una "hoja de árbol", si está inclinada hacia la derecha, significa que ambas frecuencias son iguales pero desfasadas entre 0 y 90º, pero si la inclinación es hacia la izquierda, el desfasaje está entre 90º y 180º.
+Cuando salen unas figuras que parecen un "ovillo", contando el número de tangentes de la curva con un imaginario eje vertical y horizontal, se determina la relación entre las frecuencias. Así tres tangentes en un sentido, frente a dos en el otro, significa que la relación de frecuencias es de 3/2 = 1,5 veces.

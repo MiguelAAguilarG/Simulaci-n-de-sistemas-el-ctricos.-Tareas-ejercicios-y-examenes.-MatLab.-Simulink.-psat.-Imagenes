@@ -1,0 +1,5 @@
+Tarea 3
+
+(El que tiene generador de señal)
+1. Explicar que función tiene los parametros de cada bloque.
+2. Cambiar los parametros de simulacion (Minimo 5), comparar y analizar

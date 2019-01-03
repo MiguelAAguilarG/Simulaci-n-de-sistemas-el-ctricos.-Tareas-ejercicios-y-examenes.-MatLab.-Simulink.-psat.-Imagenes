@@ -1,0 +1,33 @@
+clear
+
+basemva=100;
+
+%Acelerar
+accel=1;
+
+%Exactitud
+accuracy=0.001;
+
+maxiter=80;
+
+% 1--slack
+% 0--load
+% 2--generation
+
+%	bus	bus	voltage	angle	----Load----	-----Generator-----Injected
+%	No	code	mag	degree	MW	Mvar	MW	Mvar	Qmin	Qmax	Mvar	
+busdata=[1	1 	1.01	0	0	0	0	0	0	0	0
+	2	0	1	0	60	35	0	0	0	0	0
+	3	0	1	0	70	42	0	0	0	0	18
+	4	0	1	0	80	50	0	0	0	0	15
+	5	2	1	0	65	36	190	0	-300	300	0
+];
+
+%	Bus	bus	R	X	1/2 B	TAP
+%	NL	NR	pu	pu	pu
+linedata=[1	2	0.0108	0.0649	0	1
+	1	4	0.0235	0.0941	0	1
+	2	3	0	0.04	0	1/0.975
+	2	5	0.0118	0.0471	0	1
+	3	5	0.0147	0.0588	0	1
+	4	5	0.0118	0.0529	0	1];
